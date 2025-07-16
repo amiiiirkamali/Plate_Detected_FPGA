@@ -1,0 +1,83 @@
+ISim log file
+Running: E:\project\Ise\Licens_Plate_Recognition\clahe-1\improved_clahe_filter_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb E:/project/Ise/Licens_Plate_Recognition/clahe-1/improved_clahe_filter_isim_beh.wdb 
+ISim P.20131013 (signature 0x7708f090)
+----------------------------------------------------------------------
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps: Note: Starting image reading from file: E:\data\0-data\image61.txt (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 0/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 50/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 100/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 150/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 200/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 250/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 300/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 350/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 400/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 450/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 500/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 550/640 (/improved_clahe_filter/).
+at 0 ps: Note: Reading progress: 600/640 (/improved_clahe_filter/).
+at 0 ps: Note: Image reading completed successfully! (/improved_clahe_filter/).
+at 0 ps: Note: Applying improved CLAHE filter... (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 0/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 50/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 100/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 150/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 200/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 250/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 300/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 350/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 400/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 450/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 500/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 550/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE progress: 600/640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE filter applied successfully! (/improved_clahe_filter/).
+at 0 ps: Note: Applying adaptive blending... (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 0/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 50/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 100/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 150/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 200/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 250/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 300/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 350/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 400/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 450/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 500/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 550/640 (/improved_clahe_filter/).
+at 0 ps: Note: Blending progress: 600/640 (/improved_clahe_filter/).
+at 0 ps: Note: Adaptive blending completed! (/improved_clahe_filter/).
+at 0 ps: Note: Writing enhanced image to file: E:\data\1-output clahe\image61.txt (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 0/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 50/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 100/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 150/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 200/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 250/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 300/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 350/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 400/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 450/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 500/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 550/640 (/improved_clahe_filter/).
+at 0 ps: Note: Writing progress: 600/640 (/improved_clahe_filter/).
+at 0 ps: Note: Enhanced image written to output file successfully! (/improved_clahe_filter/).
+at 0 ps: Note: === Improved CLAHE Filter Processing Summary === (/improved_clahe_filter/).
+at 0 ps: Note: Input file: E:\data\0-data\image61.txt (/improved_clahe_filter/).
+at 0 ps: Note: Output file: E:\data\1-output clahe\image61.txt (/improved_clahe_filter/).
+at 0 ps: Note: Image dimensions: 640x640 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE tile size: 64x64 (/improved_clahe_filter/).
+at 0 ps: Note: CLAHE clip limit: 20 (/improved_clahe_filter/).
+at 0 ps: Note: Blend factor: 70% CLAHE (/improved_clahe_filter/).
+at 0 ps: Note: Processing completed successfully with improved quality! (/improved_clahe_filter/).
+Finished circuit initialization process.

@@ -1,0 +1,16 @@
+ISim log file
+Running: E:\project\Ise\Licens_Plate_Recognition\plate-detection-6\license_plate_detector_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb E:/project/Ise/Licens_Plate_Recognition/plate-detection-6/license_plate_detector_isim_beh.wdb 
+ISim P.20131013 (signature 0x7708f090)
+----------------------------------------------------------------------
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps: Note: License plate detection completed successfully (/license_plate_detector/).
+Finished circuit initialization process.

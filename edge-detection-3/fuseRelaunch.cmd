@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "E:/project/Ise/Licens_Plate_Recognition/edge-detection-3/edge_detection_filter_isim_beh.exe" -prj "E:/project/Ise/Licens_Plate_Recognition/edge-detection-3/edge_detection_filter_beh.prj" "work.edge_detection_filter" 

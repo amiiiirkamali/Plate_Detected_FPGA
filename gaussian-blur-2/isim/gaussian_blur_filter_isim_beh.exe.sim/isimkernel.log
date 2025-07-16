@@ -1,0 +1,28 @@
+Command line:
+   gaussian_blur_filter_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  51165
+
+Wed Jul 16 00:18:35 2025
+
+
+ Elaboration Time: 0.390625 sec
+
+ Current Memory Usage: 5187.76 Meg
+
+ Total Signals          : 0
+ Total Nets             : 0
+ Total Signal Drivers   : 0
+ Total Blocks           : 5
+ Total Primitive Blocks : 5
+ Total Processes        : 1
+ Total Traceable Variables  : 24
+ Total Scalar Nets and Variables : 1110
+
+ Total Simulation Time: 9.32813 sec
+
+ Current Memory Usage: 5289.49 Meg
+
+Wed Jul 16 00:18:50 2025
+

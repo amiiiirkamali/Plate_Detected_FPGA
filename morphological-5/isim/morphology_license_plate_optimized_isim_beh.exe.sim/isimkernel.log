@@ -1,0 +1,28 @@
+Command line:
+   morphology_license_plate_optimized_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  52213
+
+Wed Jul 16 07:09:11 2025
+
+
+ Elaboration Time: 0.1875 sec
+
+ Current Memory Usage: 5187.74 Meg
+
+ Total Signals          : 0
+ Total Nets             : 0
+ Total Signal Drivers   : 0
+ Total Blocks           : 5
+ Total Primitive Blocks : 5
+ Total Processes        : 1
+ Total Traceable Variables  : 25
+ Total Scalar Nets and Variables : 1100
+
+ Total Simulation Time: 2.70313 sec
+
+ Current Memory Usage: 5212.7 Meg
+
+Wed Jul 16 07:09:18 2025
+

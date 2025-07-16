@@ -1,0 +1,196 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+use STD.TEXTIO.ALL;
+use IEEE.STD_LOGIC_TEXTIO.ALL;
+
+entity gaussian_blur_filter is
+    generic (
+        input_file_name : string := "E:\data\1-output clahe\image61.txt";
+        output_file_name : string := "E:\data\2-output gaussian blur\image61.txt";
+        IMG_WIDTH : integer := 640;
+        IMG_HEIGHT : integer := 640
+    );
+end gaussian_blur_filter;
+
+architecture Behavioral of gaussian_blur_filter is
+    type image_array is array (0 to IMG_HEIGHT-1, 0 to IMG_WIDTH-1) of unsigned(7 downto 0);
+    type kernel_array is array (0 to 4, 0 to 4) of integer range 0 to 255;
+    
+    constant GAUSSIAN_KERNEL : kernel_array := (
+        (1,  4,  6,  4, 1),
+        (4, 16, 24, 16, 4),
+        (6, 24, 36, 24, 6),
+        (4, 16, 24, 16, 4),
+        (1,  4,  6,  4, 1)
+    );
+    constant KERNEL_SUM : integer := 256;
+    
+    -- ?????????? 3: ????? ????? ???? ?????????
+    constant KERNEL_RADIUS : integer := 2;
+    constant KERNEL_SIZE : integer := 5;
+    
+begin
+    main_process: process
+        file input_file : text;
+        file output_file : text;
+        variable input_line : line;
+        variable output_line : line;
+        variable pixel_value : integer;
+        variable status : file_open_status;
+        variable input_image : image_array;
+        variable output_image : image_array;
+        
+        -- ?????????? 4: ???????? ???? ???? ?????? ????
+        variable temp_sum : integer range 0 to 65535;
+        variable kernel_val : integer range 0 to 255;
+        variable pixel_val : integer range 0 to 255;
+        variable result_val : integer range 0 to 255;
+        
+        -- ?????????? 5: ???? ???? ?????????
+        impure function apply_gaussian_optimized(x, y : integer) return unsigned is
+            variable sum : integer range 0 to 65535 := 0;
+            variable pixel_temp : integer range 0 to 255;
+            variable xx, yy : integer;
+            variable kernel_x, kernel_y : integer range 0 to 4;
+        begin
+            -- ???????? ????????? ?? ?????????? ?? ??? ????? ???
+            for ky in -KERNEL_RADIUS to KERNEL_RADIUS loop
+                yy := y + ky;
+                kernel_y := ky + KERNEL_RADIUS;
+                
+                for kx in -KERNEL_RADIUS to KERNEL_RADIUS loop
+                    xx := x + kx;
+                    kernel_x := kx + KERNEL_RADIUS;
+                    
+                    -- ????? ??? ?????????
+                    if (yy >= 0 and yy < IMG_HEIGHT and xx >= 0 and xx < IMG_WIDTH) then
+                        pixel_temp := to_integer(input_image(yy, xx));
+                    else
+                        -- ?????????? 6: ??????? ?? ????? ????? ???? ?? ??? ???
+                        if yy < 0 then
+                            yy := 0;
+                        elsif yy >= IMG_HEIGHT then
+                            yy := IMG_HEIGHT - 1;
+                        end if;
+                        
+                        if xx < 0 then
+                            xx := 0;
+                        elsif xx >= IMG_WIDTH then
+                            xx := IMG_WIDTH - 1;
+                        end if;
+                        
+                        pixel_temp := to_integer(input_image(yy, xx));
+                    end if;
+                    
+                    sum := sum + pixel_temp * GAUSSIAN_KERNEL(kernel_y, kernel_x);
+                end loop;
+            end loop;
+            
+            -- ?????????? 7: ????? ????????? ?? shift
+            result_val := sum / KERNEL_SUM;
+            
+            -- ????? ???? ?? ?????? 0-255
+            if result_val > 255 then
+                result_val := 255;
+            elsif result_val < 0 then
+                result_val := 0;
+            end if;
+            
+            return to_unsigned(result_val, 8);
+        end function;
+        
+    begin
+        -- 1. ?????? ????? ?? ????? ???? ????
+        report "???? ?????? ????? ??: " & input_file_name;
+        file_open(status, input_file, input_file_name, read_mode);
+        
+        case status is
+            when open_ok =>
+                report "???? ????? ?? ?????? ??? ??";
+            when name_error =>
+                report "???: ???? ????? ???? ???!" severity failure;
+            when mode_error =>
+                report "???: ???? ?? ???? ??? ???? ????!" severity failure;
+            when others =>
+                report "???: ???? ???????? ?? ??? ???? ????!" severity failure;
+        end case;
+        
+        -- ?????? ????????? ?? ????? ???
+        for y in 0 to IMG_HEIGHT-1 loop
+            for x in 0 to IMG_WIDTH-1 loop
+                if not endfile(input_file) then
+                    readline(input_file, input_line);
+                    read(input_line, pixel_value);
+                    
+                    -- ??????? ?? ?????? ????
+                    if pixel_value > 255 then
+                        pixel_value := 255;
+                    elsif pixel_value < 0 then
+                        pixel_value := 0;
+                    end if;
+                    
+                    input_image(y, x) := to_unsigned(pixel_value, 8);
+                else
+                    report "?????: ???? ???????? ?? ?????? ???!" severity warning;
+                    input_image(y, x) := to_unsigned(0, 8);
+                end if;
+            end loop;
+            
+            -- ????? ?????? ?? 64 ??
+            if (y mod 64) = 0 then
+                report "?????? ?? " & integer'image(y) & " ?? " & integer'image(IMG_HEIGHT);
+            end if;
+        end loop;
+        
+        file_close(input_file);
+        report "?????? ????? ???? ??.";
+        
+        -- 2. ????? ????? ???? ?????????
+        report "???? ????? ????? ????...";
+        
+        for y in 0 to IMG_HEIGHT-1 loop
+            for x in 0 to IMG_WIDTH-1 loop
+                output_image(y, x) := apply_gaussian_optimized(x, y);
+            end loop;
+            
+            -- ????? ?????? ?? 64 ??
+            if (y mod 64) = 0 then
+                report "?????? ?? " & integer'image(y) & " ?? " & integer'image(IMG_HEIGHT);
+            end if;
+        end loop;
+        
+        report "????? ???? ???? ??.";
+        
+        -- 3. ????? ????? ?? ????? ???? ????
+        report "???? ????? ????? ??: " & output_file_name;
+        file_open(status, output_file, output_file_name, write_mode);
+        
+        case status is
+            when open_ok =>
+                report "???? ????? ?? ?????? ????? ??";
+            when name_error =>
+                report "???: ???????? ???? ????? ????? ???!" severity failure;
+            when others =>
+                report "???: ???? ?? ????? ???? ?????!" severity failure;
+        end case;
+        
+        for y in 0 to IMG_HEIGHT-1 loop
+            for x in 0 to IMG_WIDTH-1 loop
+                write(output_line, to_integer(output_image(y, x)));
+                writeline(output_file, output_line);
+            end loop;
+            
+            -- ????? ?????? ?? 64 ??
+            if (y mod 64) = 0 then
+                report "????? ?? " & integer'image(y) & " ?? " & integer'image(IMG_HEIGHT);
+            end if;
+        end loop;
+        
+        file_close(output_file);
+        report "???? ????? ?? ?????? ????? ??.";
+        report "?????? ???? ??!";
+        
+        wait;
+    end process;
+end Behavioral;

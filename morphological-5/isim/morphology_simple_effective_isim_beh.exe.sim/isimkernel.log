@@ -1,0 +1,28 @@
+Command line:
+   morphology_simple_effective_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  51829
+
+Tue Jun 17 22:37:34 2025
+
+
+ Elaboration Time: 0.3125 sec
+
+ Current Memory Usage: 5186.11 Meg
+
+ Total Signals          : 0
+ Total Nets             : 0
+ Total Signal Drivers   : 0
+ Total Blocks           : 5
+ Total Primitive Blocks : 5
+ Total Processes        : 1
+ Total Traceable Variables  : 23
+ Total Scalar Nets and Variables : 1096
+
+ Total Simulation Time: 3.17188 sec
+
+ Current Memory Usage: 4896.5 Meg
+
+Tue Jun 17 22:42:52 2025
+

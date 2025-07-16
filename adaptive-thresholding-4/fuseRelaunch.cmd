@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "E:/project/Ise/Licens_Plate_Recognition/adaptive-thresholding-4/adaptive_thresholding_optimized_isim_beh.exe" -prj "E:/project/Ise/Licens_Plate_Recognition/adaptive-thresholding-4/adaptive_thresholding_optimized_beh.prj" "work.adaptive_thresholding_optimized" 

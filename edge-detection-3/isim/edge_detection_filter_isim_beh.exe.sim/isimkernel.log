@@ -1,0 +1,28 @@
+Command line:
+   edge_detection_filter_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  51287
+
+Wed Jul 16 00:42:24 2025
+
+
+ Elaboration Time: 0.515625 sec
+
+ Current Memory Usage: 5195.97 Meg
+
+ Total Signals          : 0
+ Total Nets             : 0
+ Total Signal Drivers   : 0
+ Total Blocks           : 5
+ Total Primitive Blocks : 5
+ Total Processes        : 1
+ Total Traceable Variables  : 24
+ Total Scalar Nets and Variables : 1095
+
+ Total Simulation Time: 3.46875 sec
+
+ Current Memory Usage: 4749.08 Meg
+
+Wed Jul 16 00:47:08 2025
+

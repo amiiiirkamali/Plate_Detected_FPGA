@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "E:/project/Ise/Licens_Plate_Recognition/clahe-1/improved_clahe_filter_isim_beh.exe" -prj "E:/project/Ise/Licens_Plate_Recognition/clahe-1/improved_clahe_filter_beh.prj" "work.improved_clahe_filter" 
