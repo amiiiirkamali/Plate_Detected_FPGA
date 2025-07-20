@@ -1,0 +1,28 @@
+Command line:
+   license_plate_detector_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  52374
+
+Wed Jul 16 07:34:09 2025
+
+
+ Elaboration Time: 0.3125 sec
+
+ Current Memory Usage: 5191.07 Meg
+
+ Total Signals          : 0
+ Total Nets             : 0
+ Total Signal Drivers   : 0
+ Total Blocks           : 5
+ Total Primitive Blocks : 5
+ Total Processes        : 1
+ Total Traceable Variables  : 45
+ Total Scalar Nets and Variables : 1160
+
+ Total Simulation Time: 6.10938 sec
+
+ Current Memory Usage: 4760.76 Meg
+
+Wed Jul 16 15:00:46 2025
+

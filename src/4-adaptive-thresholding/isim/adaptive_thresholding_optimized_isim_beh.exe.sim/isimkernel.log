@@ -1,0 +1,28 @@
+Command line:
+   adaptive_thresholding_optimized_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  52112
+
+Wed Jul 16 06:56:45 2025
+
+
+ Elaboration Time: 0.171875 sec
+
+ Current Memory Usage: 5184.52 Meg
+
+ Total Signals          : 0
+ Total Nets             : 0
+ Total Signal Drivers   : 0
+ Total Blocks           : 5
+ Total Primitive Blocks : 5
+ Total Processes        : 1
+ Total Traceable Variables  : 24
+ Total Scalar Nets and Variables : 1100
+
+ Total Simulation Time: 4.125 sec
+
+ Current Memory Usage: 5209.49 Meg
+
+Wed Jul 16 06:56:54 2025
+

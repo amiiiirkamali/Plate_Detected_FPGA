@@ -1,0 +1,28 @@
+ISim log file
+Running: E:\project\Ise\Licens_Plate_Recognition\edge-detection-3\edge_detection_filter_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb E:/project/Ise/Licens_Plate_Recognition/edge-detection-3/edge_detection_filter_isim_beh.wdb 
+ISim P.20131013 (signature 0x7708f090)
+----------------------------------------------------------------------
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps: Note: Reading input image... (/edge_detection_filter/).
+at 0 ps: Note: Applying image sharpening... (/edge_detection_filter/).
+at 0 ps: Note: Applying optimized Gaussian blur... (/edge_detection_filter/).
+at 0 ps: Note: Calculating enhanced gradients... (/edge_detection_filter/).
+at 0 ps: Note: Applying enhanced non-maximum suppression... (/edge_detection_filter/).
+at 0 ps: Note: Applying enhanced double threshold... (/edge_detection_filter/).
+at 0 ps: Note: Enhanced edge tracking by hysteresis... (/edge_detection_filter/).
+at 0 ps: Note: Writing enhanced edge detected image... (/edge_detection_filter/).
+at 0 ps: Note: === Enhanced Edge Detection Complete === (/edge_detection_filter/).
+at 0 ps: Note: Output: E:\data\3-output edge detection\image61.txt (/edge_detection_filter/).
+at 0 ps: Note: Low threshold: 30 (/edge_detection_filter/).
+at 0 ps: Note: High threshold: 100 (/edge_detection_filter/).
+at 0 ps: Note: Enhancement factor: 2 (/edge_detection_filter/).
+Finished circuit initialization process.

@@ -1,0 +1,28 @@
+Command line:
+   improved_clahe_filter_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  50937
+
+Tue Jul 15 23:01:30 2025
+
+
+ Elaboration Time: 0.296875 sec
+
+ Current Memory Usage: 5186.08 Meg
+
+ Total Signals          : 0
+ Total Nets             : 0
+ Total Signal Drivers   : 0
+ Total Blocks           : 5
+ Total Primitive Blocks : 5
+ Total Processes        : 1
+ Total Traceable Variables  : 23
+ Total Scalar Nets and Variables : 1069
+
+ Total Simulation Time: 217.906 sec
+
+ Current Memory Usage: 5389.44 Meg
+
+Tue Jul 15 23:05:31 2025
+

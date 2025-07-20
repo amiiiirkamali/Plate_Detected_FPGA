@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "E:/project/Ise/Licens_Plate_Recognition/gaussian-blur-2/gaussian_blur_filter_isim_beh.exe" -prj "E:/project/Ise/Licens_Plate_Recognition/gaussian-blur-2/gaussian_blur_filter_beh.prj" "work.gaussian_blur_filter" 

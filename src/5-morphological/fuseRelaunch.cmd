@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "E:/project/Ise/Licens_Plate_Recognition/morphological-5/morphology_license_plate_optimized_isim_beh.exe" -prj "E:/project/Ise/Licens_Plate_Recognition/morphological-5/morphology_license_plate_optimized_beh.prj" "work.morphology_license_plate_optimized" 
