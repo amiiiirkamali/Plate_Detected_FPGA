@@ -2,100 +2,95 @@ import os
 import cv2
 
 
-def image_to_txt(image_path, output_txt_path, output_img_path, width=1364, height=768):
+def image_to_txt(image_path, output_txt_path, output_img_path, width=640, height=640):
     """
-    تبدیل ساده تصویر به فایل متنی بدون هیچ پردازشی
-    """
-    print(f"📸 تبدیل تصویر: {image_path}")
+    Convert image to text file containing RGB pixel values
 
-    # خواندن تصویر
+    Args:
+        image_path: Path to input image
+        output_txt_path: Path for output text file
+        output_img_path: Path for resized image
+        width: Target width
+        height: Target height
+
+    Returns:
+        bool: Success status
+    """
+    # Read image
     img = cv2.imread(image_path)
     if img is None:
-        print(f"❌ خطا: تصویر خوانده نشد!")
+        print(f"Error: Could not read image {image_path}")
         return False
 
-    # تغییر اندازه
+    # Resize image
     img = cv2.resize(img, (width, height))
 
-    # ذخیره تصویر ریسایز شده
+    # Save resized image
     cv2.imwrite(output_img_path, img)
 
-    # تبدیل به فایل متنی
-    print(f"💾 ذخیره در: {output_txt_path}")
-
+    # Convert to text file (RGB format)
     with open(output_txt_path, 'w') as f:
         for y in range(height):
             for x in range(width):
-                b, g, r = img[y, x]
-                r, g, b = int(r), int(g), int(b)
-                f.write(f"{r} {g} {b}\n")
+                b, g, r = img[y, x]  # OpenCV uses BGR format
+                f.write(f"{int(r)} {int(g)} {int(b)}\n")
 
-    print(f"✅ تکمیل شد")
+    print(f"Converted: {os.path.basename(image_path)}")
     return True
 
 
 def batch_convert(input_folder, output_folder, width=640, height=640):
     """
-    تبدیل دسته‌ای تصاویر به فایل متنی
-    """
-    print(f"🚀 تبدیل دسته‌ای...")
-    print(f"📂 ورودی: {input_folder}")
-    print(f"📂 خروجی: {output_folder}")
-    print(f"📐 اندازه: {width}×{height}")
-    print("-" * 50)
+    Batch convert images to text files
 
-    # ایجاد پوشه خروجی
+    Args:
+        input_folder: Input directory containing images
+        output_folder: Output directory for text files
+        width: Target width for resizing
+        height: Target height for resizing
+    """
+    # Create output directory
     os.makedirs(output_folder, exist_ok=True)
 
-    # پیدا کردن تصاویر
+    # Find image files
     image_extensions = ['.jpg', '.jpeg', '.png', '.bmp']
-    image_files = []
+    image_files = [f for f in os.listdir(input_folder)
+                   if any(f.lower().endswith(ext) for ext in image_extensions)]
 
-    for file in os.listdir(input_folder):
-        if any(file.lower().endswith(ext) for ext in image_extensions):
-            image_files.append(file)
+    if not image_files:
+        print(f"No images found in {input_folder}")
+        return
 
-    print(f"📸 {len(image_files)} تصویر پیدا شد")
+    print(f"Found {len(image_files)} images to process")
 
-    # پردازش هر تصویر
-    total_success = 0
+    # Process each image
+    successful = 0
     for i, img_file in enumerate(image_files, 1):
-        print(f"\n--- تصویر {i}/{len(image_files)}: {img_file} ---")
-
-        # مسیرها
+        # Generate file paths
         input_path = os.path.join(input_folder, img_file)
         name_without_ext = os.path.splitext(img_file)[0]
         txt_path = os.path.join(output_folder, f"{name_without_ext}.txt")
         img_path = os.path.join(output_folder, f"{name_without_ext}_resized.jpg")
 
-        # تبدیل
-        success = image_to_txt(input_path, txt_path, img_path, width, height)
+        # Convert image to text
+        if image_to_txt(input_path, txt_path, img_path, width, height):
+            successful += 1
 
-        if success:
-            total_success += 1
+        print(f"Progress: {i}/{len(image_files)}")
 
-    # خلاصه نتایج
-    print(f"\n" + "=" * 50)
-    print(f"🎉 خلاصه نتایج:")
-    print(f"   📸 کل تصاویر: {len(image_files)}")
-    print(f"   ✅ تبدیل موفق: {total_success}")
-    print("=" * 50)
+    print(f"Conversion completed: {successful}/{len(image_files)} successful")
 
 
-# === استفاده ===
+# Usage example
 if __name__ == "__main__":
-    # تنظیمات
-    INPUT_FOLDER = r"C:\Users\Amir\PycharmProjects\jpg_to_txt\plate2"
-    OUTPUT_FOLDER = r"C:\Users\Amir\PycharmProjects\jpg_to_txt\result2"
-
+    # Configuration
+    INPUT_FOLDER = "input_images"
+    OUTPUT_FOLDER = "output_txt"
     WIDTH = 640
     HEIGHT = 640
 
-    print("🎯 تبدیل ساده تصویر به متن")
-    print("=" * 50)
-
-    # تبدیل دسته‌ای
+    # Batch conversion
     batch_convert(INPUT_FOLDER, OUTPUT_FOLDER, WIDTH, HEIGHT)
 
-    # برای تبدیل تک تصویر:
-    # image_to_txt("path/to/image.jpg", "output.txt", "resized_image.jpg", WIDTH, HEIGHT)
+    # Single image conversion example:
+    # image_to_txt("image.jpg", "output.txt", "resized.jpg", WIDTH, HEIGHT)

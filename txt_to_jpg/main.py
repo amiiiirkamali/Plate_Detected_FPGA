@@ -1,221 +1,160 @@
-    # import numpy as np
-    # import cv2
-    #
-    # # ابعاد تصویر
-    # height = 640
-    # width = 640
-    #
-    # # خواندن مقادیر از فایل متنی
-    # with open('image3.txt', 'r') as f:
-    #     pixels = f.readlines()
-    #
-    # # تبدیل به عدد و آرایه numpy
-    # pixels = np.array([int(p.strip()) for p in pixels], dtype=np.uint8)
-    #
-    # # reshape به شکل تصویر
-    # image = pixels.reshape((height, width))
-    #
-    # # ذخیره تصویر
-    # cv2.imwrite('output_image.png', image)
-    #
-    # # نمایش تصویر
-    # cv2.imshow('Image', image)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
 import numpy as np
 import cv2
 import os
 import glob
 
 
-def convert_txt_to_image(input_folder, output_folder):
+def convert_txt_to_image(input_folder, output_folder, image_size=(640, 640)):
     """
-    تبدیل تمام فایل‌های txt موجود در پوشه‌ای به تصویر
+    Convert text files containing pixel values to images
 
     Args:
-        input_folder: مسیر پوشه حاوی فایل‌های txt
-        output_folder: مسیر پوشه خروجی برای ذخیره تصاویر
+        input_folder: Path to folder containing txt files
+        output_folder: Path to output folder for saving images
+        image_size: Tuple of (height, width) for output images
     """
+    height, width = image_size
 
-    # ابعاد تصویر
-    height = 640
-    width = 640
+    # Create output directory if it doesn't exist
+    os.makedirs(output_folder, exist_ok=True)
 
-    # ایجاد پوشه خروجی اگر وجود نداشته باشد
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
-        print(f"پوشه خروجی '{output_folder}' ایجاد شد.")
-
-    # پیدا کردن تمام فایل‌های txt در پوشه
+    # Find all txt files in the input folder
     txt_files = glob.glob(os.path.join(input_folder, "*.txt"))
 
     if not txt_files:
-        print(f"هیچ فایل txt در پوشه '{input_folder}' پیدا نشد!")
+        print(f"No txt files found in '{input_folder}'")
         return
 
-    print(f"تعداد {len(txt_files)} فایل txt پیدا شد.")
+    print(f"Found {len(txt_files)} txt files to process")
 
-    # پردازش هر فایل
+    # Process each file
     for i, txt_file in enumerate(txt_files, 1):
         try:
-            # خواندن مقادیر از فایل متنی
+            # Read pixel values from text file
             with open(txt_file, 'r') as f:
                 lines = f.readlines()
 
-            # تبدیل به آرایه numpy
+            # Convert lines to pixel array
             pixels = []
             for line in lines:
                 line = line.strip()
-                if line:  # اگر خط خالی نباشد
-                    # اگر خط شامل مقادیر جدا شده با فاصله باشد (RGB)
+                if line:
                     if ' ' in line:
-                        rgb_values = line.split()
-                        # تبدیل مقادیر RGB به grayscale (میانگین)
-                        gray_value = int(sum(int(val) for val in rgb_values) / len(rgb_values))
+                        # RGB values - convert to grayscale
+                        rgb_values = [int(val) for val in line.split()]
+                        gray_value = int(sum(rgb_values) / len(rgb_values))
                         pixels.append(gray_value)
                     else:
-                        # اگر مقدار تکی باشد
+                        # Single grayscale value
                         pixels.append(int(line))
 
-            # تبدیل به آرایه numpy
+            # Convert to numpy array
             pixels = np.array(pixels, dtype=np.uint8)
 
-            # بررسی تعداد پیکسل‌ها
+            # Check pixel count
             if len(pixels) != height * width:
-                print(
-                    f"خطا در فایل '{os.path.basename(txt_file)}': تعداد پیکسل‌ها {len(pixels)} است، باید {height * width} باشد!")
+                print(f"Error: {os.path.basename(txt_file)} has {len(pixels)} pixels, expected {height * width}")
                 continue
 
-            # reshape به شکل تصویر
+            # Reshape to image format
             image = pixels.reshape((height, width))
 
-            # نام فایل خروجی
+            # Generate output filename
             base_name = os.path.splitext(os.path.basename(txt_file))[0]
             output_path = os.path.join(output_folder, f"{base_name}.png")
 
-            # ذخیره تصویر
+            # Save image
             cv2.imwrite(output_path, image)
-
-            print(f"({i}/{len(txt_files)}) '{os.path.basename(txt_file)}' -> '{base_name}.png' تبدیل شد.")
+            print(f"Processed ({i}/{len(txt_files)}): {base_name}.png")
 
         except Exception as e:
-            print(f"خطا در پردازش فایل '{os.path.basename(txt_file)}': {str(e)}")
+            print(f"Error processing {os.path.basename(txt_file)}: {str(e)}")
 
-    print("تبدیل تمام فایل‌ها کامل شد!")
+    print("Conversion completed!")
 
 
-def convert_txt_to_color_image(input_folder, output_folder):
+def convert_txt_to_color_image(input_folder, output_folder, image_size=(640, 640)):
     """
-    تبدیل فایل‌های txt حاوی RGB به تصاویر رنگی
+    Convert text files containing RGB values to color images
 
     Args:
-        input_folder: مسیر پوشه حاوی فایل‌های txt
-        output_folder: مسیر پوشه خروجی برای ذخیره تصاویر
+        input_folder: Path to folder containing txt files
+        output_folder: Path to output folder for saving images
+        image_size: Tuple of (height, width) for output images
     """
+    height, width = image_size
 
-    # ابعاد تصویر
-    height = 640
-    width = 640
+    # Create output directory if it doesn't exist
+    os.makedirs(output_folder, exist_ok=True)
 
-    # ایجاد پوشه خروجی اگر وجود نداشته باشد
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
-        print(f"پوشه خروجی '{output_folder}' ایجاد شد.")
-
-    # پیدا کردن تمام فایل‌های txt در پوشه
+    # Find all txt files
     txt_files = glob.glob(os.path.join(input_folder, "*.txt"))
 
     if not txt_files:
-        print(f"هیچ فایل txt در پوشه '{input_folder}' پیدا نشد!")
+        print(f"No txt files found in '{input_folder}'")
         return
 
-    print(f"تعداد {len(txt_files)} فایل txt پیدا شد.")
+    print(f"Found {len(txt_files)} txt files to process")
 
-    # پردازش هر فایل
+    # Process each file
     for i, txt_file in enumerate(txt_files, 1):
         try:
-            # خواندن مقادیر از فایل متنی
+            # Read pixel values from text file
             with open(txt_file, 'r') as f:
                 lines = f.readlines()
 
-            # تبدیل به آرایه numpy
+            # Convert lines to RGB pixel array
             pixels = []
             for line in lines:
                 line = line.strip()
-                if line:  # اگر خط خالی نباشد
-                    # اگر خط شامل مقادیر جدا شده با فاصله باشد (RGB)
+                if line:
                     if ' ' in line:
+                        # RGB values
                         rgb_values = [int(val) for val in line.split()]
-                        # اگر RGB کامل باشد
-                        if len(rgb_values) == 3:
-                            pixels.append(rgb_values)
-                        else:
-                            # اگر فقط یک یا دو مقدار باشد، آنها را تکرار کن
-                            while len(rgb_values) < 3:
-                                rgb_values.append(rgb_values[-1])
-                            pixels.append(rgb_values)
+                        # Ensure 3 RGB values
+                        while len(rgb_values) < 3:
+                            rgb_values.append(rgb_values[-1])
+                        pixels.append(rgb_values[:3])
                     else:
-                        # اگر مقدار تکی باشد، آن را برای RGB تکرار کن
+                        # Single value - replicate for RGB
                         val = int(line)
                         pixels.append([val, val, val])
 
-            # تبدیل به آرایه numpy
+            # Convert to numpy array
             pixels = np.array(pixels, dtype=np.uint8)
 
-            # بررسی تعداد پیکسل‌ها
+            # Check pixel count
             if len(pixels) != height * width:
-                print(
-                    f"خطا در فایل '{os.path.basename(txt_file)}': تعداد پیکسل‌ها {len(pixels)} است، باید {height * width} باشد!")
+                print(f"Error: {os.path.basename(txt_file)} has {len(pixels)} pixels, expected {height * width}")
                 continue
 
-            # reshape به شکل تصویر رنگی (height, width, 3)
+            # Reshape to color image format (height, width, 3)
             image = pixels.reshape((height, width, 3))
 
-            # تبدیل از RGB به BGR برای OpenCV
+            # Convert RGB to BGR for OpenCV
             image_bgr = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
-            # نام فایل خروجی
+            # Generate output filename
             base_name = os.path.splitext(os.path.basename(txt_file))[0]
             output_path = os.path.join(output_folder, f"{base_name}_color.png")
 
-            # ذخیره تصویر
+            # Save image
             cv2.imwrite(output_path, image_bgr)
-
-            print(f"({i}/{len(txt_files)}) '{os.path.basename(txt_file)}' -> '{base_name}_color.png' تبدیل شد.")
+            print(f"Processed ({i}/{len(txt_files)}): {base_name}_color.png")
 
         except Exception as e:
-            print(f"خطا در پردازش فایل '{os.path.basename(txt_file)}': {str(e)}")
+            print(f"Error processing {os.path.basename(txt_file)}: {str(e)}")
 
-    print("تبدیل تمام فایل‌ها کامل شد!")
+    print("Conversion completed!")
 
 
-# استفاده از تابع
+# Usage example
 if __name__ == "__main__":
-    # مسیر پوشه حاوی فایل‌های txt
-    input_folder = "6-output detected plate"  # نام پوشه ورودی را اینجا وارد کنید
+    input_folder = "input_txt_files"
+    output_folder = "output_images"
 
-    # مسیر پوشه خروجی
-    output_folder = "6-results of detected plate"  # نام پوشه خروجی را اینجا وارد کنید
+    # Convert to grayscale images
+    convert_txt_to_image(input_folder, output_folder)
 
-    # انتخاب روش تبدیل
-    print("1. تبدیل به تصویر خاکستری (grayscale)")
-    print("2. تبدیل به تصویر رنگی (color)")
-    choice = input("انتخاب کنید (1 یا 2): ")
-
-    if choice == "1":
-        # اجرای تبدیل به خاکستری
-        convert_txt_to_image(input_folder, output_folder)
-    elif choice == "2":
-        # اجرای تبدیل به رنگی
-        convert_txt_to_color_image(input_folder, output_folder)
-    else:
-        print("انتخاب نامعتبر!")
-
-    # اختیاری: نمایش یکی از تصاویر تولید شده
-    output_files = glob.glob(os.path.join(output_folder, "*.png"))
-    if output_files:
-        sample_image = cv2.imread(output_files[0])
-        if sample_image is not None:
-            cv2.imshow('نمونه تصویر تولید شده', sample_image)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
+    # Or convert to color images
+    # convert_txt_to_color_image(input_folder, output_folder)
